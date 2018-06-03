@@ -25,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
     float dX, dY; //for location and movement
     private View ImageView; // for using inside functions (this is the imageView)
     int checkPlace =0;
-    Button stop,jump;
+    Button stop,jump,start;
+    ObjectAnimator startRun;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +38,16 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout background = (LinearLayout) findViewById(R.id.background);
         background.setBackgroundColor(Color.WHITE);
 //------------now i get the buttons and the image view from the layout xml -------
-        Button start = (Button) findViewById(R.id.start);
+        start = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
         jump = (Button) findViewById(R.id.jump);
         ImageView = findViewById(R.id.run);
+        ImageView.setVisibility(View.INVISIBLE);
 //----------here i set OnClick to start/stop the animation list
+        stop.setClickable(false);
+        stop.setBackgroundColor(Color.RED);
+        start.setBackgroundColor(Color.GREEN);
+        start.setClickable(true);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,14 +57,36 @@ public class MainActivity extends AppCompatActivity {
                 AnimationDrawable runMan = (AnimationDrawable) run.getDrawable();
                 runMan.start();
                 //------------now i put the image view movement to go 700dp right and just go outside the screen----------
-                final ObjectAnimator startRun = ObjectAnimator.ofFloat(ImageView, "translationX", 650f);
-                startRun.setDuration(2000);
-                final AnimatorSet bouncer = new AnimatorSet();
-                final ObjectAnimator comeback = ObjectAnimator.ofFloat(ImageView, "translationX", -650f);
-                comeback.setDuration(1);
-                bouncer.play(comeback).after(startRun);
+                dY = ImageView.getX();
+                if(checkPlace==1){
 
-                bouncer.start();
+                }else{
+                    ImageView.setX(-500);
+                }
+
+                ImageView.setVisibility(View.VISIBLE);
+                startRun = ObjectAnimator.ofFloat(ImageView, "translationX", 650f);
+                startRun.setDuration(3000);
+
+
+
+                if(checkPlace==1){
+                    ImageView.setX(dY);
+                    startRun.start();
+                    checkPlace=0;
+                    start.setClickable(true);
+                    start.setBackgroundColor(Color.GREEN);
+                    stop.setClickable(false);
+                    stop.setBackgroundColor(Color.RED);
+                    start.setText("restart");
+                }else {
+                    startRun.setRepeatCount(Animation.INFINITE);
+                    startRun.start();
+                    start.setClickable(false);
+                    start.setBackgroundColor(Color.RED);
+                    stop.setClickable(true);
+                    stop.setBackgroundColor(Color.GREEN);
+                }
             }
         });
 
@@ -69,33 +100,31 @@ public class MainActivity extends AppCompatActivity {
                 fadeAnim.setDuration(400);
                 bouncer.play(fadeAnim).after(fadeaAnim);
                 bouncer.start();
-                checkPlace=1;
+
             }
         });
 
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkPlace==1){
-                    stop.setText("stop");
 
-                ImageView run = (ImageView) findViewById(R.id.run);
-                run.setImageResource(R.drawable.running);
-                //------here i put the animation on the imageView----
-                AnimationDrawable runMan = (AnimationDrawable) run.getDrawable();
-                runMan.start();
-                //-----i set the imageview at the left of the screen and move back to the middle-------
-                ImageView.setX(-500);
-                ObjectAnimator animation = ObjectAnimator.ofFloat(ImageView, "translationX", 500f);
-                animation.setDuration(2000);
-                animation.start();
-                checkPlace=0;
-                }else{
-                    ImageView run = (ImageView) findViewById(R.id.run);
-                    AnimationDrawable runMan = (AnimationDrawable) run.getDrawable();
-                    runMan.stop();
-                }
-            }
+            dX = ImageView.getX();
+          ImageView run = (ImageView) findViewById(R.id.run);
+          run.setImageResource(R.drawable.running);
+            //------here i put the animation on the imageView----
+          AnimationDrawable runMan = (AnimationDrawable) run.getDrawable();
+              runMan.stop();
+              startRun.setRepeatCount(0);
+              startRun.pause();
+              ImageView.setX(dX);
+                checkPlace=1;
+                start.setClickable(true);
+                start.setBackgroundColor(Color.GREEN);
+                stop.setClickable(false);
+                stop.setBackgroundColor(Color.RED);
+                start.setText("finish");
+          }
+
         });
 //----------here i add the option to move the imageView with combination of OnClick and OnTouch-----
         ImageView.setOnClickListener(new View.OnClickListener() {
