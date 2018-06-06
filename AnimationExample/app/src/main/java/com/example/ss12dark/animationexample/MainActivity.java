@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 dY2 = ImageView.getY();
                 ObjectAnimator up = ObjectAnimator.ofFloat(ImageView, "translationY", dY2-600);
                 up.setDuration(400);
-                ObjectAnimator down = ObjectAnimator.ofFloat(ImageView, "translationY", dY2-335);
+                ObjectAnimator down = ObjectAnimator.ofFloat(ImageView, "translationY", dY2-287);
                 down.setDuration(350);
                 bouncer.play(down).after(up);
                 bouncer.start();
