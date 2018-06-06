@@ -19,31 +19,38 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    float dX, dY; //for location and movement
-    private View ImageView; // for using inside functions (this is the imageView)
+    float dX, dX2,dY,dY2;
+    private View ImageView;
     int checkPlace =0;
-    Button stop,jump,start;
+    int changestyle = 4;
+    int changeshape = 3;
+    Button stop,jump,start,change,shape;
+    View sample;
     ObjectAnimator startRun;
-
+    Context mContext = this;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//-----------the background need to be white for better visual with the image------
+
         LinearLayout background = (LinearLayout) findViewById(R.id.background);
         background.setBackgroundColor(Color.WHITE);
-//------------now i get the buttons and the image view from the layout xml -------
+
+        shape = (Button) findViewById(R.id.changeshape);
+        sample = (View) findViewById(R.id.sample);
+        change = (Button) findViewById(R.id.changeStyle);
         start = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
         jump = (Button) findViewById(R.id.jump);
         ImageView = findViewById(R.id.run);
         ImageView.setVisibility(View.INVISIBLE);
-//----------here i set OnClick to start/stop the animation list
+
         stop.setClickable(false);
         stop.setBackgroundColor(Color.RED);
         start.setBackgroundColor(Color.GREEN);
@@ -53,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ImageView run = (ImageView) findViewById(R.id.run);
                 run.setImageResource(R.drawable.running);
-                //------here i put the animation on the imageView----
+
                 AnimationDrawable runMan = (AnimationDrawable) run.getDrawable();
                 runMan.start();
-                //------------now i put the image view movement to go 700dp right and just go outside the screen----------
-                dY = ImageView.getX();
+
+                dX2 = ImageView.getX();
                 if(checkPlace==1){
 
                 }else{
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(checkPlace==1){
-                    ImageView.setX(dY);
+                    ImageView.setX(dX2);
                     startRun.start();
                     checkPlace=0;
                     start.setClickable(true);
@@ -94,11 +101,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AnimatorSet bouncer = new AnimatorSet();
-                ObjectAnimator fadeaAnim = ObjectAnimator.ofFloat(ImageView, "translationY", -200f);
-                fadeaAnim.setDuration(250);
-                ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(ImageView, "translationY", 50f);
-                fadeAnim.setDuration(400);
-                bouncer.play(fadeAnim).after(fadeaAnim);
+                dY2 = ImageView.getY();
+                ObjectAnimator up = ObjectAnimator.ofFloat(ImageView, "translationY", dY2-600);
+                up.setDuration(400);
+                ObjectAnimator down = ObjectAnimator.ofFloat(ImageView, "translationY", dY2-335);
+                down.setDuration(350);
+                bouncer.play(down).after(up);
                 bouncer.start();
 
             }
@@ -111,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             dX = ImageView.getX();
           ImageView run = (ImageView) findViewById(R.id.run);
           run.setImageResource(R.drawable.running);
-            //------here i put the animation on the imageView----
+
           AnimationDrawable runMan = (AnimationDrawable) run.getDrawable();
               runMan.stop();
               startRun.setRepeatCount(0);
@@ -126,7 +134,66 @@ public class MainActivity extends AppCompatActivity {
           }
 
         });
-//----------here i add the option to move the imageView with combination of OnClick and OnTouch-----
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (changestyle%4){
+                    case 0:{
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            jump.setTextAppearance(R.style.text);
+                            change.setTextAppearance(R.style.text);
+                            changestyle++;
+                        }else{
+                            Toast.makeText(mContext,"your device API wont support style change", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    }
+                    case 1:{
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            jump.setTextAppearance(R.style.text2);
+                            change.setTextAppearance(R.style.text2);
+                            changestyle++;
+                        }else{
+                            Toast.makeText(mContext,"your device API wont support style change", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    }
+                    case 2:{
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            jump.setTextAppearance(R.style.text3);
+                            change.setTextAppearance(R.style.text3);
+                            changestyle++;
+                        }else{
+                            Toast.makeText(mContext,"your device API wont support style change", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    }
+                    case 3:{
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            jump.setTextAppearance(R.style.text4);
+                            change.setTextAppearance(R.style.text4);
+                            changestyle++;
+                        }else{
+                            Toast.makeText(mContext,"your device API wont support style change", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+
+        shape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (changeshape%3){
+                    case 0:{sample.setBackgroundResource(R.drawable.shape1);changeshape++;break;}
+                    case 1:{sample.setBackgroundResource(R.drawable.shape2);changeshape++;break;}
+                    case 2:{sample.setBackgroundResource(R.drawable.shape3);changeshape++;break;}
+                }
+            }
+        });
+
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onTouch(View view, MotionEvent motionEvent) {
 
                             switch (motionEvent.getAction()) {
-//--------i get the motionEvent from the OnTouch and check with switch what action he do and get the Y and X from the location -----
+
                                 case MotionEvent.ACTION_DOWN:
 
                                     dX = view.getX() - motionEvent.getRawX();
@@ -143,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
 
                                 case MotionEvent.ACTION_MOVE:
-//----in case its movvement, i use animate to move it with he finger -------
+
                                     view.animate()
                                             .x(motionEvent.getRawX() + dX)
                                             .y(motionEvent.getRawY() + dY)

@@ -8,4 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ff0000</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    <style name="text2">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#0080ff</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="text3">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">#00ff1e</item>
+        <item name="android:padding">7dp</item>
+    </style>
+    <style name="text4">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#ea00ff</item>
+        <item name="android:padding">2dp</item>
+    </style>
 </resources>

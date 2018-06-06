@@ -11,13 +11,18 @@
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ImageView
+        android:background="@drawable/shape3"
+        android:id="@+id/sample"
+        android:layout_width="200dp"
+        android:layout_height="30dp" />
 
     <ImageView
         android:id="@+id/run"
         android:layout_gravity="center"
-        android:layout_width="152dp"
-        android:layout_height="300dp"
-        app:srcCompat="@drawable/untitled401" />
+        android:layout_width="140dp"
+        android:layout_height="270dp"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -36,6 +41,16 @@
     <Button
         android:id="@+id/jump"
         android:text="jump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/changeStyle"
+        android:text="Change style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/changeshape"
+        android:text="Change shape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
