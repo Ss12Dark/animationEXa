@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:gravity="center"
+        android:background="@drawable/untitledsss"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/myName"
+                android:text="name"
+                android:padding="10dp"
+                android:layout_weight="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/money"
+                android:text="0"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/lvl"
+                android:text="lvl 1"
+                android:padding="10dp"
+                android:layout_weight="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <ImageView
+            android:background="@drawable/untitleds"
+            android:id="@+id/monster"
+            android:layout_width="match_parent"
+            android:layout_height="370dp" />
+
+        <ProgressBar
+            android:layout_margin="10dp"
+            android:progress="0"
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:onClick="buyWeapon"
+                android:id="@+id/w1"
+                android:text="500dmg"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="buyWeapon"
+                android:id="@+id/w2"
+                android:text="150dmg"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="buyWeapon"
+                android:id="@+id/w3"
+                android:text="50dmg"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="buyWeapon"
+                android:id="@+id/w4"
+                android:text="10dmg"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:id="@+id/wn1"
+                android:text="0"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/wn2"
+                android:text="0"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/wn3"
+                android:text="0"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/wn4"
+                android:text="0"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/damage"
+            android:text="click damage: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
